@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	h1.
+		Activities
+	ul
+		each activity, i in activities
+			li
+				a(href="mailto:#{activity.href}")= activity.title
