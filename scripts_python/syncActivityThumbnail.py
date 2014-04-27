@@ -6,7 +6,7 @@ import json
 import time
 from mongoengine import *
 
-connect('javierca', host='localhost')
+connect('activities', host='localhost')
 
 class Activity(Document):
     id = LongField(required=True, primary_key=True)
@@ -35,15 +35,15 @@ class Activity(Document):
 keys = set()
 def insertActivityDetails(activity):
     activity.delete()
-    print( 'id: ' + str(activity.id))
-    ip = "82.158.56.212"
+#    print( 'id: ' + str(activity.id))
+    ip = "54.186.199.166"
     query = activity.lugar
-    url = 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q='+ urllib.parse.quote_plus(query) + '&rsz=1&userip='+ ip;
+    url = 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q='+ str(urllib.parse.quote_plus(query)) + '&rsz=1&userip='+ ip;
     raw = urlopen(url)
     raw = raw.read().decode(encoding='UTF-8');
     thumbnail = json.loads(raw)
     activity.thumbnail = thumbnail['responseData']['results'][0]['tbUrl']
-    print(activity.thumbnail)
+    #print(str(activity.thumbnail))
 
     activity.save(force_insert=True, clean=False)
 
@@ -53,4 +53,4 @@ for item in Activity.objects:
     insertActivityDetails(item)
     time.sleep(0.1)
 
-print(keys)
+#print(str(keys))

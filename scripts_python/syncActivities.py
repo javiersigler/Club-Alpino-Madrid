@@ -6,7 +6,7 @@ from dateutil import parser
 from mongoengine import *
 import re
 
-connect('javierca', host='localhost')
+connect('activities', host='localhost')
 
 class Activity(Document):
     id = LongField(required=True, primary_key=True)
@@ -41,7 +41,7 @@ soup = soup.find(id="main")
 activities = set()
 for line in soup.find_all('li'):
     activity = Activity()
-    print(line.get_text())
+#    print(str(line.get_text()))
     for span in line.find_all('span'):
         if span['class'] == ["fecha"]:
             date = line.span.string.split(' al ')
@@ -59,4 +59,4 @@ for line in soup.find_all('li'):
     activity.title = ref.replace(str(activity.id), '').replace('-', '').strip()
     activities.add(activity)
     activity.save(force_insert=True, clean=False)
-    print('from: ' + str(activity.fromDate) + ', to: ' + str(activity.toDate) + ', name: ' + activity.title + ', id: ' + str(activity.id) + ', type: ' + activity.type + ', href: ' + str(activity.href))
+#   print('from: ' + str(activity.fromDate) + ', to: ' + str(activity.toDate) + ', name: ' + str(activity.title) + ', id: ' + str(activity.id) + ', type: ' + str(activity.type) + ', href: ' + str(activity.href))
