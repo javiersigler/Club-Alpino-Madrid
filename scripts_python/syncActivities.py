@@ -6,7 +6,7 @@ from dateutil import parser
 from mongoengine import *
 import re
 
-connect('activities2', host='localhost')
+connect('app24921821', host='localhost')
 
 class Activity(Document):
     id = LongField(required=True, primary_key=True)

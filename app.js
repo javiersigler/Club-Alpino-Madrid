@@ -10,7 +10,7 @@ var http = require('http');
 var path = require('path');
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost/activities');
+var db = monk('localhost/app24921821');
 
 var app = express();
 

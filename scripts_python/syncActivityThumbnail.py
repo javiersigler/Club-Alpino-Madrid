@@ -6,7 +6,7 @@ import json
 import time
 from mongoengine import *
 
-connect('javierca', host='localhost')
+connect('app24921821', host='localhost')
 
 class Activity(Document):
     id = LongField(required=True, primary_key=True)
