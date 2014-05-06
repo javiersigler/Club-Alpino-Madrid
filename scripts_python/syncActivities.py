@@ -6,7 +6,7 @@ from dateutil import parser
 from mongoengine import *
 import re
 
-connect('activities', host='localhost')
+connect('activities2', host='localhost')
 
 class Activity(Document):
     id = LongField(required=True, primary_key=True)
@@ -23,13 +23,13 @@ class Activity(Document):
     desnivel_positivo = StringField()
     lugar = StringField()
     reserva_alojamiento = StringField()
-    tiempo_de_duración = StringField()
+    #tiempo_de_duración = StringField()
     desnivel_negativo = StringField()
     tipo_de_dificultad = StringField()
-    fecha_de_celebración = StringField()
+    #fecha_de_celebración = StringField()
     participantes = StringField()
     tipo_de_actividad = StringField()
-    fecha_límite_de_registro = StringField()
+    #fecha_límite_de_registro = StringField()
     thumbnail = StringField()
 
 Activity.drop_collection()
@@ -41,13 +41,13 @@ soup = soup.find(id="main")
 activities = set()
 for line in soup.find_all('li'):
     activity = Activity()
-#    print(str(line.get_text()))
+    print(line.get_text())
     for span in line.find_all('span'):
         if span['class'] == ["fecha"]:
             date = line.span.string.split(' al ')
-            activity.fromDate = parser.parse(date[0])
+            activity.fromDate = parser.parse(date[0], dayfirst=True)
             if len(date) > 1:
-                activity.toDate = parser.parse(date[1])
+                activity.toDate = parser.parse(date[1], dayfirst=True)
             else:
                 activity.toDate = activity.fromDate
         else:
@@ -59,4 +59,4 @@ for line in soup.find_all('li'):
     activity.title = ref.replace(str(activity.id), '').replace('-', '').strip()
     activities.add(activity)
     activity.save(force_insert=True, clean=False)
-#   print('from: ' + str(activity.fromDate) + ', to: ' + str(activity.toDate) + ', name: ' + str(activity.title) + ', id: ' + str(activity.id) + ', type: ' + str(activity.type) + ', href: ' + str(activity.href))
+    print('from: ' + str(activity.fromDate) + ', to: ' + str(activity.toDate) + ', name: ' + activity.title + ', id: ' + str(activity.id) + ', type: ' + activity.type + ', href: ' + str(activity.href))
