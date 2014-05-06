@@ -10,7 +10,7 @@ var http = require('http');
 var path = require('path');
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('ec2-54-186-92-226.us-west-2.compute.amazonaws.com:27017/activities');
+var db = monk('localhost/activities');
 
 var app = express();
 
