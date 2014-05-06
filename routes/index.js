@@ -29,6 +29,23 @@ exports.userlist = function(db) {
 };
 
 /*
+ * GET DB Output page
+ */
+exports.activities = function(db) {
+    return function(req, res) {
+        var collection = db.get('activity');
+        collection.find({},{},function(e,docs){
+            res.json(docs);
+            /*
+            res.render('activities', {
+                'activities' : docs
+            });
+            */
+        });
+    };
+};
+
+/*
  * GET DB Input page
  */
 exports.newuser = function(req, res){

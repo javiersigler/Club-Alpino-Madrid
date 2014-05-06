@@ -10,7 +10,7 @@ var http = require('http');
 var path = require('path');
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/nodetest1');
+var db = monk('ec2-54-186-92-226.us-west-2.compute.amazonaws.com:27017/activities');
 
 var app = express();
 
@@ -36,6 +36,7 @@ app.get('/helloworld', routes.helloworld);
 app.get('/userlist', routes.userlist(db));
 app.get('/newuser', routes.newuser);
 app.post('/adduser', routes.adduser(db));
+app.get('/activities', routes.activities(db));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
