@@ -10,7 +10,7 @@
         "url": "https://github.com/javiersigler/Club-Alpino-Madrid.git"
     },
 	"dependencies": {
-		"express": "3.4.4",
+		"express": "4.19.2",
 		"jade": "*",
 		"mongodb": "*",
 		"monk": "*"
